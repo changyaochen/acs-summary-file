@@ -29,6 +29,7 @@ proc import datafile = "&Data_Dir./acsdt1y2019-&Table_ID..dat"
   GUESSINGROWS=10000;
 run;
 
+
 /* import geography labels */
 proc import datafile="&Geo_File"
     out=Geos
