@@ -20,7 +20,7 @@
 libname out ".";
 
 /** Import Data **/
-proc import datafile = "&Data_Dir./acsdt1y2020-&Table_ID..dat"
+proc import datafile = "&Data_Dir./acsdt5y2020-&Table_ID..dat"
   out = out.&Table_ID
   dbms = dlm
   replace;
@@ -46,7 +46,7 @@ proc sql;
 	select geo.name, tbl.*
     from out.&Table_ID as tbl 
 	left join Geos as geo
-	on tbl.GEO_ID = geo.DADSID
+	on tbl.GEO_ID = geo.geoid
 	where geo.stusab = upcase("&State");
 quit;
 
