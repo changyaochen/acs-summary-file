@@ -13,15 +13,15 @@
 /*------------ADD INPUT HERE ------------*/
 %let Table_ID =b19001;
 %let State  =ca;
-%let Data_Dir =../../1YRData;
-%let Geo_File =../../Geos20191YR.csv;
+%let Data_Dir =../../5YRData;
+%let Geo_File =../../Geos20205YR.csv;
 /*---------------------------------------*/
 
 
 libname out ".";
 
 /** Import Data **/
-proc import datafile = "&Data_Dir./acsdt1y2019-&Table_ID..dat"
+proc import datafile = "&Data_Dir./acsdt5y2020-&Table_ID..dat"
   out = out.&Table_ID
   dbms = dlm
   replace;
@@ -47,7 +47,7 @@ proc sql;
 	select geo.name, tbl.*
     from out.&Table_ID as tbl 
 	left join Geos as geo
-	on tbl.GEO_ID = geo.DADSID
+	on tbl.GEO_ID = geo.geoid
 	where geo.stusab = upcase("&State");
 quit;
 

@@ -43,7 +43,7 @@ data namelist (keep= names);
 	zipfile=index(dir_line,'.zip');
 	if zipfile > 0 then delete;
 
-	a=index(dir_line,'acsdt5y2019');
+	a=index(dir_line,'acsdt5y2020');
 	names=substr(dir_line,a);
 	b=index(names,'-');
 	names=substr(names,b+1);
@@ -68,7 +68,7 @@ proc printto log="&Temp_Dir./&TBID.inputcode.log" new;
 run; 
 
 options obs=3;
-proc import datafile = "&Data_Dir./acsdt5y2019-&TBID..dat"
+proc import datafile = "&Data_Dir./acsdt5y2020-&TBID..dat"
   out = &TBID.firsttwo
   dbms = dlm
   replace;
@@ -120,7 +120,7 @@ data cleancode;
 run;
 %include "&Temp_Dir./&TBID.input.sas"; 
 
-data out.acsdt5y2019_&TBID.;
+data out.acsdt5y2020_&TBID.;
 	set &TBID.orig;
 	If index(GEO_ID,"&Summary_Level")=1;
 run;
