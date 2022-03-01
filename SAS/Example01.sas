@@ -46,7 +46,7 @@ proc sql;
 	select geo.name, tbl.*
     from out.&Table_ID as tbl 
 	left join Geos as geo
-	on tbl.GEO_ID = geo.geoid
+	on tbl.GEO_ID = geo.dadsid
 	where geo.stusab = upcase("&State");
 quit;
 
