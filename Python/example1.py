@@ -23,4 +23,4 @@ def get_data(tblid, year, dataset, state):
 
 
 
-get_data("b19001", 2019, 1, "CA")
+get_data("b19001", 2020, 5, "CA")

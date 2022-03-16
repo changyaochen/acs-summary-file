@@ -33,4 +33,4 @@ def table_for_sumlevel(tblid, year, dataset, sumlevel):
             print(f"{outdir}/{file} output.")
 
 #get all tables for all tracts
-table_for_sumlevel(tblid = '*', year=2019, dataset=5, sumlevel='140')
+table_for_sumlevel(tblid = '*', year=2020, dataset=5, sumlevel='140')
