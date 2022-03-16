@@ -1,5 +1,5 @@
 # acs-summary-file
- Example code for the ACS Summary File
+Technical documentation and example code for the new ACS Summary File
 
 See Wiki for more info:
 
