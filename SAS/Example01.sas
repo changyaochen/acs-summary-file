@@ -1,7 +1,7 @@
 
 /************************************************************************************************************************/
 /* Program Name: Example Program for Summary File Prototype (Basic)					                  					*/
-/* Version 2, Jan 12 2021                                                                             					*/      
+/* Version 3, Aug 04 2022                                                                             					*/      
 /* Output: Data for any given 1-year table for all geographies and sub-geographies of the given state 					*/
 /* ACS Summary File Website: 																							*/
 /*		https://www.census.gov/programs-surveys/acs/technical-documentation/summary-file-documentation.html  			*/
@@ -14,13 +14,13 @@
 %let Table_ID =b19001;
 %let State  =ca;
 %let Data_Dir =../../5YRData;
-%let Geo_File =../../Geos20205YR.csv;
+%let Geo_File =../../Geos20215YR.csv;
 /*---------------------------------------*/
 
 libname out ".";
 
 /** Import Data **/
-proc import datafile = "&Data_Dir./acsdt5y2020-&Table_ID..dat"
+proc import datafile = "&Data_Dir./acsdt5y2021-&Table_ID..dat"
   out = out.&Table_ID
   dbms = dlm
   replace;
@@ -33,9 +33,10 @@ run;
 /* import geography labels */
 proc import datafile="&Geo_File"
     out=Geos
-    dbms=csv
+    dbms=dlm
     replace;
     getnames=yes;
+    delimiter = '|';
 	GUESSINGROWS=10000;
 run;
 
@@ -46,7 +47,7 @@ proc sql;
 	select geo.name, tbl.*
     from out.&Table_ID as tbl 
 	left join Geos as geo
-	on tbl.GEO_ID = geo.dadsid
+	on tbl.GEO_ID = geo.geo_id
 	where geo.stusab = upcase("&State");
 quit;
 
