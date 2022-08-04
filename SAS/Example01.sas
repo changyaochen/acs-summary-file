@@ -13,14 +13,14 @@
 /*------------ADD INPUT HERE ------------*/
 %let Table_ID =b19001;
 %let State  =ca;
-%let Data_Dir =../../5YRData;
-%let Geo_File =../../Geos20215YR.csv;
+%let Data_Dir =../../1YRData;
+%let Geo_File =../../Geos20211YR.csv;
 /*---------------------------------------*/
 
 libname out ".";
 
 /** Import Data **/
-proc import datafile = "&Data_Dir./acsdt5y2021-&Table_ID..dat"
+proc import datafile = "&Data_Dir./acsdt1y2021-&Table_ID..dat"
   out = out.&Table_ID
   dbms = dlm
   replace;
