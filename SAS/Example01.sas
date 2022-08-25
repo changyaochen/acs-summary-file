@@ -14,7 +14,7 @@
 %let Table_ID =b19001;
 %let State  =ca;
 %let Data_Dir =../../1YRData;
-%let Geo_File =../../Geos20211YR.csv;
+%let Geo_File =../../Geos20211YR.txt;
 /*---------------------------------------*/
 
 libname out ".";
