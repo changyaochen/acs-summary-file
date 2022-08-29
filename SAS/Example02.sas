@@ -12,7 +12,7 @@
 
 /*------------ADD INPUT HERE------------*/
 %let Summary_Level 	=140;
-%let Data_Dir 		=/data/prt03/test/2020Sumfile/5YRData;		*Must be absolute path;
+%let Data_Dir 		=/data/prt03/test/2021Sumfile/5YRData;		*Must be absolute path;
 %let Output_Dir		=./output; 				
 %let Temp_Dir 		=./temp;				
 /*---------------------------------------*/
@@ -25,6 +25,7 @@ option nonotes nodate nonumber ls=129 ps=32767;
 libname out "&Output_Dir."; 
 
 /*Pipe allows SAS to execute non SAS programs that has standard input output*/
+*filename tmp pipe 'dir "C:\Work\New Summary Files\Demo\5YRData\*.dat" /b /s';
 filename tmp pipe "ls -mlR --full-time -1 &Data_Dir./";
 
 /*Extract all data sets names with file paths from tmp */
@@ -43,7 +44,7 @@ data namelist (keep= names);
 	zipfile=index(dir_line,'.zip');
 	if zipfile > 0 then delete;
 
-	a=index(dir_line,'acsdt5y2020');
+	a=index(dir_line,'acsdt5y2021');
 	names=substr(dir_line,a);
 	b=index(names,'-');
 	names=substr(names,b+1);
@@ -68,7 +69,7 @@ proc printto log="&Temp_Dir./&TBID.inputcode.log" new;
 run; 
 
 options obs=3;
-proc import datafile = "&Data_Dir./acsdt5y2020-&TBID..dat"
+proc import datafile = "&Data_Dir./acsdt5y2021-&TBID..dat"
   out = &TBID.firsttwo
   dbms = dlm
   replace;
@@ -120,7 +121,7 @@ data cleancode;
 run;
 %include "&Temp_Dir./&TBID.input.sas"; 
 
-data out.acsdt5y2020_&TBID.;
+data out.acsdt5y2021_&TBID.;
 	set &TBID.orig;
 	If index(GEO_ID,"&Summary_Level")=1;
 run;

@@ -6,22 +6,23 @@
 /* ACS Summary File Website: 																							*/
 /*		https://www.census.gov/programs-surveys/acs/technical-documentation/summary-file-documentation.html  			*/
 /* Program Documentation:																								*/
-/*		https://www2.census.gov/programs-surveys/acs/summary_file/2018/prototype/program/documentation					*/  
+/*		https://www2.census.gov/programs-surveys/acs/summary_file/2020/prototype/program/documentation					*/  
 /************************************************************************************************************************/
 
 
 /*------------ADD INPUT HERE ------------*/
-%let Table_ID =b19001;
+%let Table_ID =b01001;
 %let State  =ca;
-%let Data_Dir =../../5YRData;
-%let Geo_File =../../Geos20205YR.csv;
+%let Data_Dir =../../1YRData;
+%let Geo_File =../../Geos20211YR.txt;
 /*---------------------------------------*/
 
 
 libname out ".";
 
+
 /** Import Data **/
-proc import datafile = "&Data_Dir./acsdt5y2020-&Table_ID..dat"
+proc import datafile = "&Data_Dir./acsdt1y2021-&Table_ID..dat"
   out = out.&Table_ID
   dbms = dlm
   replace;
@@ -33,10 +34,11 @@ run;
 
 /* import geography labels */
 proc import datafile="&Geo_File"
-    out=Geos
-    dbms=csv
+    out = Geos
+    dbms = dlm
     replace;
     getnames=yes;
+	delimiter = '|';
 	GUESSINGROWS=10000;
 run;
 
@@ -47,7 +49,7 @@ proc sql;
 	select geo.name, tbl.*
     from out.&Table_ID as tbl 
 	left join Geos as geo
-	on tbl.GEO_ID = geo.dadsid
+	on tbl.GEO_ID = geo.GEO_ID
 	where geo.stusab = upcase("&State");
 quit;
 
