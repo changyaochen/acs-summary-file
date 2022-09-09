@@ -9,7 +9,7 @@ def get_data(tblid, year, dataset, state):
 
     #read data into dataframe
     data = pd.read_csv(data_url, sep='|', index_col="GEO_ID")
-    geos = pd.read_csv(geo_url, index_col="DADSID", encoding = "ISO-8859-1")
+    geos = pd.read_csv(geo_url, sep='|', index_col="DADSID")
 
     #add geo file names and search for state
     data = data.join(geos[["NAME", "STUSAB"]])
@@ -23,4 +23,4 @@ def get_data(tblid, year, dataset, state):
 
 
 
-get_data("b19001", 2020, 5, "CA")
+get_data("b19001", 2021, 1, "CA")
