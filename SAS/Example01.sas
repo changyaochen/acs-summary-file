@@ -23,7 +23,7 @@ libname out ".";
 
 /** Import Data **/
 proc import datafile = "&Data_Dir./acsdt1y2021-&Table_ID..dat"
-  out = out.&Table_ID
+  out = &Table_ID
   dbms = dlm
   replace;
   getnames = yes;
@@ -47,7 +47,7 @@ run;
 proc sql;
 	create table out.&Table_ID as 
 	select geo.name, tbl.*
-    from out.&Table_ID as tbl 
+    	from &Table_ID as tbl 
 	left join Geos as geo
 	on tbl.GEO_ID = geo.GEO_ID
 	where geo.stusab = upcase("&State");
