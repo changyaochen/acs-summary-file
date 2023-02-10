@@ -30,7 +30,7 @@ def download_table_for_summary_level(
     For information on this new Summary File format, please visit:
     https://www.census.gov/programs-surveys/acs/data/summary-file.html
 
-    For the semantic of the each column (i.e., data dictionary), please visit:
+    For the semantic of each column (i.e., data dictionary), please visit:
     https://www2.census.gov/programs-surveys/acs/summary_file/{year}/table-based-SF/documentation/ACS{year}{aggregation}YR_Table_Shells.txt
 
     For example, the first few lines from
